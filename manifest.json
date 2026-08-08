@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "db_version": "20260808050808",
+  "generated_at_utc": "2026-08-08T05:08:08Z",
+  "files": {
+    "titles.pack": {
+      "url": "titles.pack",
+      "size": 25449752,
+      "sha256": "112e1c870e6798b91f3fb2e2f9ef9c3f27a5f05535b292ed1785018c1524cb6e"
+    },
+    "icons.pack": {
+      "url": "icons.pack",
+      "size": 385350300,
+      "sha256": "ca05ce705946d471f43d17c76425c1904c0a727aa5b3a1422fd7c2b6cd442e60"
+    }
+  }
+}
