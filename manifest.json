@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "db_version": "20260827233809",
-  "generated_at_utc": "2026-08-27T23:38:09Z",
+  "db_version": "20260808050808",
+  "generated_at_utc": "2026-08-08T05:08:08Z",
   "files": {
     "titles.pack": {
       "url": "titles.pack",
@@ -10,8 +10,8 @@
     },
     "icons.pack": {
       "url": "icons.pack",
-      "size": 383972478,
-      "sha256": "34bb4a7b3456a1eb46aa29ea59840b613ed4db7aef14f7129fbabe9d6d078969"
+      "size": 385350300,
+      "sha256": "ca05ce705946d471f43d17c76425c1904c0a727aa5b3a1422fd7c2b6cd442e60"
     }
   }
 }
