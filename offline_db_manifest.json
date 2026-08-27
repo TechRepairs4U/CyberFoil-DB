@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "db_version": "20260808050808",
-  "generated_at_utc": "2026-08-08T05:08:08Z",
+  "db_version": "20260827235059",
+  "generated_at_utc": "2026-08-27T23:50:59Z",
   "files": {
     "titles.pack": {
       "url": "titles.pack",
