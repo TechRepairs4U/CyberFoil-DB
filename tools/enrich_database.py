@@ -371,8 +371,20 @@ def write_icons_pack(path, records):
         for tid, (_, data) in sorted(records.items()): out.write(data)
 
 
-def build(original_icons):
+ARTWORK_LAYOUT = 'stretch-full-tile-v2'
+
+
+def normalize_cover(raw):
+    """Fill the square app tile without baking letterbox bars into the pack."""
     from PIL import Image, ImageOps
+    with Image.open(io.BytesIO(raw)) as im:
+        face = ImageOps.exif_transpose(im).convert('RGB').resize((256, 256), Image.Resampling.LANCZOS)
+        buf = io.BytesIO()
+        face.save(buf, format='WEBP', quality=88, method=4)
+        return buf.getvalue()
+
+
+def build(original_icons):
     titles = read_json(CACHE / 'titles-enriched.json')
     records = unpack_icons(original_icons)
     sources = read_json(CACHE / 'art-sources.json')
@@ -381,24 +393,19 @@ def build(original_icons):
     for i, (tid, source) in enumerate(sources.items(), 1):
         raw = (CACHE/'art'/f'{tid}.image').read_bytes()
         assert hashlib.sha256(raw).hexdigest() == source['sha256']
-        # Asset format/size normalization only. Preserve the complete cover;
-        # the old builder cropped rectangular box art into a square.
+        # User-selected full-tile fit: retain the complete cover, stretching
+        # rectangular artwork rather than cropping or adding black side bars.
         path = ROOT/'icons'/f'{tid}.webp'
-        if path.exists() and previous.get(tid, {}).get('sha256') == source['sha256']:
+        if (path.exists() and previous.get(tid, {}).get('sha256') == source['sha256']
+                and previous.get(tid, {}).get('layout') == ARTWORK_LAYOUT):
             data = path.read_bytes()
             assert hashlib.sha256(data).hexdigest() == previous[tid]['packed_sha256']
         else:
-            with Image.open(io.BytesIO(raw)) as im:
-                face = ImageOps.contain(im.convert('RGBA'), (256,256), Image.Resampling.LANCZOS)
-                canvas = Image.new('RGB', (256,256), (17,20,27))
-                canvas.paste(face, ((256-face.width)//2,(256-face.height)//2), face)
-                buf = io.BytesIO()
-                canvas.save(buf,format='WEBP',quality=88,method=4)
-            data = buf.getvalue()
+            data = normalize_cover(raw)
         records[tid] = ('webp', data)
         path.parent.mkdir(exist_ok=True)
         path.write_bytes(data)
-        provenance['artwork'][tid] = dict(source, packed_sha256=hashlib.sha256(data).hexdigest(), match='normalized exact title plus unique catalogue platform', generated=False)
+        provenance['artwork'][tid] = dict(source, packed_sha256=hashlib.sha256(data).hexdigest(), match='normalized exact title plus unique catalogue platform', generated=False, layout=ARTWORK_LAYOUT)
         if i % 1000 == 0: print('Normalized covers:', i, flush=True)
     write_json(ROOT/'titles.json', titles)
     write_titles_pack(ROOT/'titles.pack', titles)
@@ -430,9 +437,11 @@ def validate():
     from PIL import Image
     titles = read_json(ROOT/'titles.json')
     original = json.loads(subprocess.check_output([GIT,'-C',str(ROOT),'show','HEAD:titles.json']))
-    assert titles.keys() == original.keys(), 'Title IDs changed'
+    assert original.keys() <= titles.keys(), 'Existing title IDs removed'
+    additions=titles.keys()-original.keys()
+    assert all(tid.startswith('07') for tid in additions), 'Unexpected non-catalogue title ID'
     manual=read_json(ROOT/'manual-metadata-corrections.json') if (ROOT/'manual-metadata-corrections.json').exists() else {}
-    for tid in titles:
+    for tid in original:
         exceptions=manual.get(tid,{}).get('fields',{})
         for field in ('name','size','version','releaseDate','isDemo','intro'):
             if field in exceptions:
@@ -470,6 +479,15 @@ def validate():
     for tid,source in provenance['artwork'].items():
         assert hashlib.sha256(records[tid][1]).hexdigest()==source['packed_sha256']
         assert records[tid][1] == (ROOT/'icons'/f'{tid}.webp').read_bytes()
+    if (ROOT/'catalogue-artwork.json').exists():
+        catalogue=read_json(ROOT/'catalogue-artwork.json')
+        assert catalogue['schema']==1
+        keys=set()
+        for platform,ident,name,tid in catalogue['entries']:
+            assert (platform,ident) not in keys
+            keys.add((platform,ident))
+            assert tid in records and tid in titles and name
+        assert additions <= {r[3] for r in catalogue['entries']}
     print(f'PASS: all {len(titles)} title records round-trip; all {len(records)} images decode; manifests and source hashes agree; existing descriptions and names preserved except documented manual corrections; IDs preserved.')
 
 

@@ -1,17 +1,22 @@
 {
   "schema": 1,
-  "db_version": "20261013035333",
-  "generated_at_utc": "2026-10-13T03:53:33Z",
+  "db_version": "20261013072331",
+  "generated_at_utc": "2026-10-13T07:23:31Z",
   "files": {
     "titles.pack": {
       "url": "titles.pack",
-      "size": 18475711,
-      "sha256": "2d2b3a9cfff7e2961bb798948b8d8005ebf816085f96e529f1b16d97e273bb1e"
+      "size": 19089732,
+      "sha256": "e128f868d6c5b2bda8adb2cbb29c49a68a2e189567250575ca7e31600ff6aa43"
     },
     "icons.pack": {
       "url": "icons.pack",
-      "size": 250323642,
-      "sha256": "5a1acd5a17d57b4a48dd3b78eb07550c5b5877734650f68fa0f7219428f5bb47"
+      "size": 479063940,
+      "sha256": "11b3fca9e8dfd191ce21d477acabcc3ab0be5176fd6f34c245ff22b8eb4194f3"
+    },
+    "catalogue-artwork.json": {
+      "url": "catalogue-artwork.json",
+      "size": 1301386,
+      "sha256": "2172475cc2483c09fe44019ac67784328f6605879e9eb048b3c2ee3a956f324e"
     }
   }
 }

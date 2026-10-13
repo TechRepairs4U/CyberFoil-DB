@@ -1,4 +1,19 @@
-# Artwork and metadata enrichment — 13 October 2026
+# Catalogue artwork repair — 13 October 2026
+
+- Rebuilt the 11,939 previously replaced covers to fill square tiles: no added
+  black bars, and no cropped-off artwork. Rectangular covers are stretched.
+- Added system-scoped catalogue associations, including explicit Ports aliases
+  and manually reviewed original-game editions where appropriate.
+- Added 8,446 missing catalogue covers from platform-specific box-art scans and
+  matched IGDB artwork, plus 10,934 system-scoped associations. Ports now has
+  verified artwork for 78 of 82 catalogue entries. Counts and unresolved entries
+  are in `catalogue-artwork-report.json`.
+- Existing title IDs, descriptions and original unmatched images are retained.
+  New `07` artwork IDs are metadata-only and must never be used for installation.
+- No server-supplied images, generic image-search results, or AI substitutes.
+  Entries without a verified match still use the app's system placeholder.
+
+## Previous enrichment pass
 
 This is a checked, incremental improvement to the existing 20,288-title database,
 not a completed manual review of every game.

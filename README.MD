@@ -17,7 +17,15 @@ Replacement artwork is selected using a normalized exact title and an
 unambiguous platform match. Sequels, numbered editions, hacks, beta labels and
 meaningful title suffixes are not fuzzy-matched to another game. Console-specific
 box-art scans are preferred, with catalogue covers as a fallback. Full covers
-are fitted into a 256 x 256 WebP canvas without cropping their edges.
+are stretched to fill a 256 x 256 WebP tile without cropping their edges or
+adding black padding. This is the app owner's selected presentation policy.
+
+`catalogue-artwork.json` associates each shop system and catalogue identifier
+with a pack artwork ID. It prevents identical names on different consoles from
+selecting each other's covers. It is versioned and hash-checked alongside the
+packs. `07`-prefixed additions are artwork/metadata keys, not install title IDs.
+Ports can use verified artwork for their original game, not a claimed official
+Switch release; such manually selected editions are recorded in provenance.
 
 Sources:
 
@@ -55,11 +63,17 @@ Only run enrichment in a dedicated checkout. Preserve the old packs/release.
    that file or paste credentials into command arguments.
 3. Run the `boxart-indexes`, `plan`, `boxart-plan`, `download-art`, and `metadata`
    actions. Review their cached plans and errors before applying changes.
-4. Run `build --original-icons /path/to/previous/icons.pack`, then `validate`.
+4. Run `build --original-icons /path/to/previous/icons.pack`.
    This regenerates the source files, both binary packs and both manifests.
+   Then run `python tools/repair_catalogue_artwork.py plan`, `download`, and
+   `apply` in that order to retain/add the system-scoped catalogue associations.
+   Review the source plan before downloading. The optional `ports_metadata`
+   action refreshes the separately cached Ports candidates. Run
+   `python tools/enrich_database.py validate` and `python tools/test_cover_layout.py`.
 5. Run `python tools/test_enrichment.py`. Review all changes, provenance,
    unmatched entries, and the obsolete-extension list in the local cache.
-6. Commit the source changes and LFS packs. Upload all four release assets to a
+6. Commit the source changes and LFS packs. Upload both packs, both manifests,
+   and `catalogue-artwork.json` to a
    new draft release, verify their hashes, then publish it as latest. Never
    overwrite an old release or publish only one half of the pack pair.
 
