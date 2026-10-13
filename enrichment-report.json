@@ -1,0 +1,23 @@
+{
+  "new_factual_descriptions": 539,
+  "publisher_filled": 402,
+  "existing_synopsis_promoted": 4640,
+  "manually_corrected_records": 2,
+  "titles": 20288,
+  "replaced_artwork": 11939,
+  "boxart_scans": 2611,
+  "catalogue_covers": 9328,
+  "remaining_without_description": 4756,
+  "unchanged_artwork": 8349,
+  "failed_artwork_downloads": {
+    "050007FAD9642000": "UnidentifiedImageError: artwork validation/download failed",
+    "05002BE7973CA000": "UnidentifiedImageError: artwork validation/download failed",
+    "0500354696BE0000": "UnidentifiedImageError: artwork validation/download failed",
+    "05006654178C2000": "UnidentifiedImageError: artwork validation/download failed",
+    "050082B2EE8BC000": "UnidentifiedImageError: artwork validation/download failed",
+    "050094BECE068000": "UnidentifiedImageError: artwork validation/download failed",
+    "0500B346D2D0A000": "UnidentifiedImageError: artwork validation/download failed",
+    "0500B3F7EDB00000": "UnidentifiedImageError: artwork validation/download failed",
+    "0500D1F7346D0000": "UnidentifiedImageError: artwork validation/download failed"
+  }
+}

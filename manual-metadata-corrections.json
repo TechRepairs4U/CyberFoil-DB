@@ -1,0 +1,22 @@
+{
+  "05000041A3814000": {
+    "reason": "The existing pack title-card image explicitly identifies Carnage 2 (SMB2 Hack) (Old), Nintendo Entertainment System. The imported Borderlands expansion identity is unrelated.",
+    "evidence": "https://github.com/TechRepairs4U/CyberFoil-DB/blob/afe015e1ecddc5d237246397ca77d0ca966d4980/icons/05000041A3814000.webp",
+    "fields": {
+      "name": "Carnage 2 (SMB2 Hack) (Old)",
+      "intro": "An older variant of the Carnage 2 NES ROM hack.",
+      "description": "A fan-made modification of Super Mario Bros. 2 for the Nintendo Entertainment System. This entry is the older Carnage 2 hack variant.",
+      "publisher": "",
+      "releaseDate": null
+    }
+  },
+  "05000004473C6000": {
+    "reason": "The original synopsis describes the 1999 Windows/Mac enhanced remake. The catalogue and matched Genesis box art identify the Mega Drive/Genesis version, released in 1994.",
+    "evidence": "https://www.igdb.com/games/richard-scarrys-busytown",
+    "fields": {
+      "intro": "Explore Richard Scarry's Busytown on Mega Drive / Genesis.",
+      "description": "An educational game set in Richard Scarry's Busytown. This Mega Drive / Genesis edition was released in 1994.",
+      "releaseDate": null
+    }
+  }
+}

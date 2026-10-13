@@ -1,17 +1,17 @@
 {
   "schema": 1,
-  "db_version": "20261012200713",
-  "generated_at_utc": "2026-10-12T20:07:13Z",
+  "db_version": "20261013035333",
+  "generated_at_utc": "2026-10-13T03:53:33Z",
   "files": {
     "titles.pack": {
       "url": "titles.pack",
-      "size": 16262719,
-      "sha256": "13ad97001a8ad507be6458fe80feeb5d34b55bc23a941b88fde6dfbe7c48b0af"
+      "size": 18475711,
+      "sha256": "2d2b3a9cfff7e2961bb798948b8d8005ebf816085f96e529f1b16d97e273bb1e"
     },
     "icons.pack": {
       "url": "icons.pack",
-      "size": 305966264,
-      "sha256": "ccc2f3c878fbf41223e33b77279eb9be4b2916a62440f06a2228e0adf5604bc3"
+      "size": 250323642,
+      "sha256": "5a1acd5a17d57b4a48dd3b78eb07550c5b5877734650f68fa0f7219428f5bb47"
     }
   }
 }
